@@ -1,0 +1,17 @@
+{
+  "name": "serverless-emotify",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "serverless.com",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-google-cloudfunctions": "^1.2.0"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^0.22.1"
+  }
+}
