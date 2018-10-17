@@ -1,6 +1,8 @@
-const LIKELY = ['VERY_LIKELY', 'LIKELY'];
+const LIKELY = ['VERY_LIKELY', 'LIKELY', 'POSSIBLE'];
+const UNLIKELY = ['VERY_UNLIKELY', 'UNLIKELY'];
+const UNKNOWN = ['UNKNOWN'];
 
-const isHappy = ({
+const likelyToBeHappy = ({
   joy,
   surprise
 }) => {
@@ -11,11 +13,33 @@ const isHappy = ({
   return false;
 };
 
-const isUnhappy = ({
+const unlikelyToBeHappy = ({
+  joy,
+  surprise
+}) => {
+  if (UNLIKELY.includes(joy) || UNLIKELY.includes(surprise)) {
+    return true;
+  }
+
+  return false;
+};
+
+const likelyToBeUnhappy = ({
   anger,
   sorrow
 }) => {
   if (LIKELY.includes(anger) || LIKELY.includes(sorrow)) {
+    return true;
+  }
+
+  return false;
+};
+
+const unlikelyToBeUnhappy = ({
+  anger,
+  sorrow
+}) => {
+  if (UNLIKELY.includes(anger) || UNLIKELY.includes(sorrow)) {
     return true;
   }
 
@@ -28,9 +52,13 @@ const convertSentimentsToHappyIndex = ({
   sorrow,
   surprise
 }) => {
-  if (isHappy({ joy, surprise })) {
+  if (likelyToBeHappy({ joy, surprise })) {
     return 1;
-  } else if (isUnhappy({ anger, sorrow })) {
+  } else if (likelyToBeUnhappy({ anger, sorrow })) {
+    return -1;
+  } else if (unlikelyToBeUnhappy({ anger, sorrow })) {
+    return 1;
+  } else if (unlikelyToBeHappy({ joy, sorrow })) {
     return -1;
   }
 
