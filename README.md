@@ -11,7 +11,27 @@ Follow the steps below to setup the credential and GCP project
 * Change `provider.project` in `serverless.yml` to match your `project-key` (you can get it from JSON file)
 
 ### Run function locally
-TBD
+Have a read at https://cloud.google.com/functions/docs/emulator
+
+```bash
+# Install functions-emulator 
+npm install -g @google-cloud/functions-emulator
+
+# Config the GCP project
+  # Replace $YOUR_PROJECT_ID with GCP project id
+functions config set projectId $YOUR_PROJECT_ID
+
+# Start emulator
+functions start
+
+# Deploy a function locally
+functions deploy http --trigger-http
+
+# Execute a function
+  # Replace $BASE64 with base64 encoded image data
+functions call http --data='{"content": "$BASE64"}'
+```
+
 
 ### Deploy function
 ```bash
