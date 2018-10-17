@@ -1,13 +1,10 @@
+const LIKELY = ['VERY_LIKELY', 'LIKELY'];
+
 const isHappy = ({
   joy,
   surprise
 }) => {
-  if (
-    joy === 'VERY_LIKELY'
-    || joy === 'LIKELY'
-    || surprise === 'VERY_LIKELY'
-    || surprise === 'LIKELY'
-  ) {
+  if (LIKELY.includes(joy) || LIKELY.includes(surprise)) {
     return true;
   }
 
@@ -18,12 +15,7 @@ const isUnhappy = ({
   anger,
   sorrow
 }) => {
-  if (
-    anger === 'VERY_LIKELY'
-    || anger === 'LIKELY'
-    || sorrow === 'VERY_LIKELY'
-    || sorrow === 'LIKELY'
-  ) {
+  if (LIKELY.includes(anger) || LIKELY.includes(sorrow)) {
     return true;
   }
 
