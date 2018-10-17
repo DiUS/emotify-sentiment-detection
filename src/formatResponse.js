@@ -52,14 +52,12 @@ const convertSentimentsToHappyIndex = ({
   sorrow,
   surprise
 }) => {
-  if (likelyToBeHappy({ joy, surprise })) {
-    return 1;
-  } else if (likelyToBeUnhappy({ anger, sorrow })) {
+  if (likelyToBeUnhappy({ anger, sorrow })) {
     return -1;
-  } else if (unlikelyToBeUnhappy({ anger, sorrow })) {
+  } else if (likelyToBeHappy({ joy, surprise })) {
     return 1;
-  } else if (unlikelyToBeHappy({ joy, sorrow })) {
-    return -1;
+  } else if (unlikelyToBeHappy({ joy, sorrow }) && unlikelyToBeUnhappy({ anger, sorrow })) {
+    return 0;
   }
 
   return 0;
@@ -81,8 +79,6 @@ exports.formatResponse = results => {
   });
 
   return {
-    faces: {
-      faceSentiments
-    }
+    faceSentiments
   };
 };
