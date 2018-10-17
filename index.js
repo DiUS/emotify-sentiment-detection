@@ -45,6 +45,20 @@ const handlePOST = (req, res) => {
 }
 
 exports.http = (req, res) => {
+  // Enable CORS
+  res.set('Access-Control-Allow-Origin', '*');
+
+  if (req.method === 'OPTIONS') {
+    // Send response to OPTIONS requests
+    res.set('Access-Control-Allow-Methods', 'GET');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    res.status(204).send('');
+  } else {
+    // Set CORS headers for the main request
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+
   switch (req.method) {
     case 'GET':
       handleGET(req, res);
